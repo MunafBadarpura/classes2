@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Check, Heart, BookOpen, Target, Users2, Award, Lightbulb, Apple } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Check, Heart, BookOpen, Target, Users2, Award, Lightbulb, Apple, Star } from 'lucide-react';
 import { BRAND_NAME, FEATURES, ACHIEVEMENTS, PROGRAMS, TESTIMONIALS } from '../constants';
 import Button from '../components/Button';
 import WaveSeparator from '../components/WaveSeparator';
@@ -300,24 +300,75 @@ const Home: React.FC = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-display font-bold text-gray-900 mb-4">Parent & Student Love</h2>
-            <div className="h-1.5 w-20 bg-brand-accent mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.id} className="bg-white p-8 rounded-3xl relative shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-4xl text-brand-purple/20 font-serif absolute top-4 left-6">"</div>
-                <p className="text-gray-700 italic mb-6 relative z-10 pt-4">{t.text}</p>
-                <div>
-                  <h4 className="font-bold text-gray-900">{t.author}</h4>
-                  <p className="text-sm text-gray-500">{t.role}</p>
-                </div>
+          {/* Scrolling testimonials container */}
+          <div className="relative">
+            <div className="overflow-hidden">
+              <div className="flex gap-6 animate-scroll-left">
+                {/* First set of testimonials */}
+                {TESTIMONIALS.map((testimonial) => (
+                  <div key={testimonial.id} className="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] flex-shrink-0 text-center">
+                    {/* Testimonial text at top */}
+                    <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
+                      {testimonial.text}
+                    </p>
+                    
+                    {/* Star rating */}
+                    <div className="flex gap-0.5 mb-4 justify-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    
+                    {/* Author info */}
+                    <div className="flex items-center justify-center gap-3">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" 
+                           style={{backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`}}>
+                        {testimonial.author.charAt(0)}
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-semibold text-gray-900 text-sm">{testimonial.author}</h4>
+                        <p className="text-xs text-gray-500">{testimonial.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                
+                {/* Duplicate set for seamless scrolling */}
+                {TESTIMONIALS.map((testimonial) => (
+                  <div key={`duplicate-${testimonial.id}`} className="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] flex-shrink-0 text-center">
+                    {/* Testimonial text at top */}
+                    <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
+                      {testimonial.text}
+                    </p>
+                    
+                    {/* Star rating */}
+                    <div className="flex gap-0.5 mb-4 justify-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    
+                    {/* Author info */}
+                    <div className="flex items-center justify-center gap-3">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" 
+                           style={{backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`}}>
+                        {testimonial.author.charAt(0)}
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-semibold text-gray-900 text-sm">{testimonial.author}</h4>
+                        <p className="text-xs text-gray-500">{testimonial.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
