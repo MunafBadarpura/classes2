@@ -2,18 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Scrolling animation for testimonials */
-@keyframes scroll-left {
+/* Marquee animation for testimonials - Seamless continuous scroll */
+@keyframes marquee {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(calc(-306px * 3)); /* Exact width of 3 testimonials (300px + 6px gap each) */
   }
 }
 
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Faster animation on mobile screens */
+@media (max-width: 767px) {
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+}
+
+/* Remove old animation */
 .animate-scroll-left {
-  animation: scroll-left 25s linear infinite;
+  /* This class is no longer used */
 }
 
 /* Blob animations */

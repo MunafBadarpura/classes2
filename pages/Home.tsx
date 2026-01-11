@@ -300,78 +300,66 @@ const Home: React.FC = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-display font-bold text-gray-900 mb-4">Parent & Student Love</h2>
-          </div>
+      {/* Testimonials */}
+<section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="text-center mb-16">
+      <h2 className="text-3xl lg:text-4xl font-display font-bold text-gray-900">
+        Parent & Student Love
+      </h2>
+    </div>
 
-          {/* Scrolling testimonials container */}
-          <div className="relative">
-            <div className="overflow-hidden">
-              <div className="flex gap-6 animate-scroll-left">
-                {/* First set of testimonials */}
-                {TESTIMONIALS.map((testimonial) => (
-                  <div key={testimonial.id} className="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] flex-shrink-0 text-center">
-                    {/* Testimonial text at top */}
-                    <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
-                      {testimonial.text}
-                    </p>
-                    
-                    {/* Star rating */}
-                    <div className="flex gap-0.5 mb-4 justify-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    
-                    {/* Author info */}
-                    <div className="flex items-center justify-center gap-3">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" 
-                           style={{backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`}}>
-                        {testimonial.author.charAt(0)}
-                      </div>
-                      <div className="text-left">
-                        <h4 className="font-semibold text-gray-900 text-sm">{testimonial.author}</h4>
-                        <p className="text-xs text-gray-500">{testimonial.role}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                
-                {/* Duplicate set for seamless scrolling */}
-                {TESTIMONIALS.map((testimonial) => (
-                  <div key={`duplicate-${testimonial.id}`} className="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] flex-shrink-0 text-center">
-                    {/* Testimonial text at top */}
-                    <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
-                      {testimonial.text}
-                    </p>
-                    
-                    {/* Star rating */}
-                    <div className="flex gap-0.5 mb-4 justify-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    
-                    {/* Author info */}
-                    <div className="flex items-center justify-center gap-3">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" 
-                           style={{backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`}}>
-                        {testimonial.author.charAt(0)}
-                      </div>
-                      <div className="text-left">
-                        <h4 className="font-semibold text-gray-900 text-sm">{testimonial.author}</h4>
-                        <p className="text-xs text-gray-500">{testimonial.role}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+    {/* Marquee */}
+    <div className="relative overflow-hidden">
+      <div className="flex gap-6 animate-marquee">
+        {/* Create exactly 6 testimonials (2 complete sets) for seamless loop */}
+        {[...TESTIMONIALS, ...TESTIMONIALS].map((testimonial, index) => (
+          <div
+            key={index}
+            className="bg-white p-6 rounded-2xl shadow-sm w-[300px] flex-shrink-0 text-center"
+          >
+            {/* Text */}
+            <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
+              {testimonial.text}
+            </p>
+
+            {/* Stars */}
+            <div className="flex justify-center gap-0.5 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                />
+              ))}
+            </div>
+
+            {/* Author */}
+            <div className="flex items-center justify-center gap-3">
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                style={{
+                  backgroundColor: `hsl(${(index % 3 * 120) % 360}, 70%, 60%)`,
+                }}
+              >
+                {testimonial.author.charAt(0)}
+              </div>
+              <div className="text-left">
+                <h4 className="font-semibold text-gray-900 text-sm">
+                  {testimonial.author}
+                </h4>
+                <p className="text-xs text-gray-500">
+                  {testimonial.role}
+                </p>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+    
 
       {/* CTA Section */}
       <section className="py-20 bg-white">
